@@ -10,7 +10,7 @@ def get_quiz_response(youtube_url: str, language: str, num_questions: int) -> Qu
     quiz = generate_quiz_from_youtube(youtube_url, language, num_questions)
     return QuizResponse(quiz=quiz)
 
-@router.post(
+@router.get(
     "/",
     response_model=QuizResponse,
     summary="Generate a quiz from a YouTube video transcript",

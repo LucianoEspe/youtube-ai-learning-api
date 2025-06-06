@@ -76,5 +76,21 @@ La API estará disponible en http://localhost:8000
 
 ## 📖 Uso
 
+Todos los endpoints son ahora **GET** y requieren autenticación a través de la API Key en el encabezado `X-API-Key`.
+
+### Ejemplo: Obtener un resumen
+
+```http
+GET /summary?youtube_url=https://www.youtube.com/watch?v=ZacjOVVgoLY&language=en
+API-Key: tu_api_key_aqui
+```
+
+### Ejemplo: Obtener un cuestionario
+
+```http
+GET /quiz?youtube_url=https://www.youtube.com/watch?v=ZacjOVVgoLY&language=en&num_questions=5
+API-Key: tu_api_key_aqui
+```
+
 **Documentación interactiva**  
 Visita http://localhost:8000/docs para acceder a la documentación interactiva de Swagger UI.

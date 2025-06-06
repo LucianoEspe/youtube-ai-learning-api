@@ -10,7 +10,7 @@ def get_summary_response(youtube_url: str, language: str) -> SummaryResponse:
     summary = generate_summary_from_youtube(youtube_url, language=language)
     return SummaryResponse(summary=summary)
 
-@router.post(
+@router.get(
     "/",
     response_model=SummaryResponse,
     summary="Generate a summary from a YouTube video transcript",
