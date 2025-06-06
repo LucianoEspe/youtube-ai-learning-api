@@ -20,7 +20,7 @@ El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los da
 
 - **FastAPI**: Framework web moderno y rápido para Python
 - **OpenAI API**: Modelo GPT para generación de contenido
-- **YouTube Transcript API**: Para acceso a transcripciones de videos
+- **YouTube Transcript3 (RapidAPI)**: Para acceso a transcripciones de videos vía https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3
 - **uv**: Gestor de dependencias Python ultrarrápido
 - **Pydantic**: Validación de datos y serialización
 
@@ -41,6 +41,7 @@ graph LR
 
 - Python 3.8+
 - Token de API de OpenAI
+- Token de API de YouTube Transcript3 (RapidAPI)
 - uv instalado ([Guía de instalación](https://docs.astral.sh/uv/getting-started/installation/))
 
 ## 🔧 Instalación
