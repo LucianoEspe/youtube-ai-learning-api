@@ -4,7 +4,7 @@ Una API desarrollada con FastAPI que utiliza inteligencia artificial para genera
 El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los datos de transcripción eran almacenados en el backend (Odoo Framework).
 
 ## 🚀 Demo en vivo
-[![Demo en vivo](https://img.shields.io/badge/PROBAR_DEMO-AQU%C3%8D-10b981?style=for-the-badge)](https://your-domain.com/demo)
+[![Demo en vivo](https://img.shields.io/badge/PROBAR_DEMO-AQU%C3%8D-10b981?style=for-the-badge)](https://youtube-ai-learning-api.onrender.com/docs#/)
 
 *Nota: La demo pública utiliza mi token de OpenAI con límites de uso.*
 
