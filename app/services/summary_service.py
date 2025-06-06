@@ -7,7 +7,7 @@ import os
 
 def build_summary_prompt(language: str) -> str:
     base_prompt = os.getenv("SUMMARY_PROMPT") or ""
-    prompt_lang = f"Respond in {language}. " if language else ""
+    prompt_lang = f"Create the summary in {language} (IMPORTANT). " if language else ""
     return f"{prompt_lang}{base_prompt}"
 
 

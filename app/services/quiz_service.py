@@ -9,7 +9,7 @@ import re
 
 def build_quiz_prompt(language: str, num_questions: int) -> str:
     base_prompt = os.getenv("QUIZ_PROMPT") or ""
-    prompt_lang = f"Respond in {language}. " if language else ""
+    prompt_lang = f"Create the quiz in {language} (IMPORTANT). " if language else ""
     return f"{prompt_lang}{base_prompt} Create {num_questions} questions."
 
 def parse_quiz_response(response_text: str) -> list[QuizQuestion]:
