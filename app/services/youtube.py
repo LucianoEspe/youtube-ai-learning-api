@@ -36,7 +36,7 @@ def extract_youtube_id(youtube_url: str) -> str:
 def build_transcript_endpoint(video_url: str, language: str = "en") -> str:
     """Build the endpoint URL for the transcript API request."""
     encoded_url = quote(video_url, safe='')
-    lang = language or "es"
+    lang = language or "en"
     return f"/api/transcript-with-url?url={encoded_url}&flat_text=true&lang={lang}"
 
 def fetch_transcript_from_api(endpoint: str) -> str:
