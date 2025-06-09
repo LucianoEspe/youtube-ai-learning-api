@@ -19,29 +19,32 @@ El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los da
 ## 🛠️ Tecnologías
 
 - **FastAPI**: Framework web moderno y rápido para Python
-- **OpenAI API**: Modelo GPT para generación de contenido
+- **OpenAI API**: Modelo GPT para generación de contenido (usando cliente asíncrono `AsyncOpenAI`)
 - **YouTube Transcript3 (RapidAPI)**: Para acceso a transcripciones de videos vía <a href="https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3" target="_blank" rel="noopener noreferrer">https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3</a>
+- **Redis**: Cache asíncrona de resultados usando `redis.asyncio`
+- **httpx**: Cliente HTTP asíncrono para llamadas externas
 - **uv**: Gestor de dependencias Python ultrarrápido
 - **Pydantic**: Validación de datos y serialización
 
 ## 🔍 Flujo de procesamiento
 ```mermaid
-graph LR
-    A[URL YouTube] --> B(Extraer ID)
-    B --> C[Transcripción API]
-    C --> D{OpenAI API}
-    D --> E[Resumen del video]
-    D --> F[Cuestionario de autoevaluación]
-    E --> G[Formato JSON]
-    F --> G
-    G --> H[Respuesta API]
+  graph LR
+      A[URL YouTube] --> B(Extraer ID)
+      B --> C[Transcripción API]
+      C --> D{OpenAI API (Async)}
+      D --> E[Resumen del video]
+      D --> F[Cuestionario de autoevaluación]
+      E --> G[Formato JSON]
+      F --> G
+      G --> H[Respuesta API]
 ```
 
 ## 📋 Requisitos previos
 
-- Python 3.8+
+- Python 3.11+
 - Token de API de OpenAI
 - Token de API de YouTube Transcript3 (RapidAPI)
+- Redis instalado y corriendo localmente o en la nube
 - uv instalado (<a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer">Guía de instalación</a>)
 
 ## 🔧 Instalación
@@ -62,21 +65,39 @@ graph LR
    cp .env.example .env
    ```
 
-4. **Edita el archivo .env y agrega tu token de OpenAI:**
-   ```
-   OPENAI_API_KEY=tu_token_aqui
+4. **Edita el archivo .env y agrega tu token de OpenAI y RapidAPI:**
+   ```env
+   OPENAI_API_KEY=tu_token_openai
+   RAPIDAPI_KEY=tu_token_rapidapi
+   REDIS_URL=redis://localhost:6379
    ```
 
 5. **Ejecuta la aplicación**
    ```bash
-   uv run uvicorn main:app --reload
+   uv run uvicorn app.main:app --reload
    ```
 
 La API estará disponible en <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a>
 
+## 🧑‍💻 Notas técnicas
+
+- Todo el backend es **asíncrono**: FastAPI, Redis, httpx y OpenAI usan await/async.
+- El cliente de OpenAI es `AsyncOpenAI`.
+- El cache usa `redis.asyncio`.
+- Puedes limpiar la cache de Redis ejecutando:
+  ```bash
+  redis-cli FLUSHALL
+  ```
+  O desde Python:
+  ```python
+  import asyncio
+  from app.services.redis_client import redis_client
+  asyncio.run(redis_client.flushdb())
+  ```
+
 ## 📖 Uso
 
-Todos los endpoints son ahora **GET** y requieren autenticación a través de la API Key en el encabezado `X-API-Key`.
+Todos los endpoints son **GET** y requieren autenticación a través de la API Key en el encabezado `API-Key`.
 
 ### Ejemplo: Obtener un resumen
 
