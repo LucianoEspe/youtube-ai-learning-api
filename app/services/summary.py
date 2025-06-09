@@ -3,6 +3,7 @@ from app.services.youtube import get_transcript_from_youtube
 from app.services.openai import client
 from app.utils.exceptions import APIException, TranscriptException
 import os
+from app.services.redis_client import redis_client
 
 
 def build_summary_prompt(language: str) -> str:
@@ -15,6 +16,13 @@ def build_summary_prompt(language: str) -> str:
 def generate_summary_from_youtube(youtube_url: str, language: str = "es") -> str:
     """Generate a summary from a YouTube video transcript."""
     logger = logging.getLogger(__name__)
+    cache_key = f"summary:{youtube_url}:{language}"
+    cached = redis_client.get(cache_key)
+    if cached:
+        logger.info("Summary fetched from Redis cache")
+        if isinstance(cached, bytes):
+            return cached.decode("utf-8")
+        return str(cached)
     try:
         logger.info(f"Fetching transcript for URL: {youtube_url}")
         transcript = get_transcript_from_youtube(youtube_url)
@@ -25,6 +33,7 @@ def generate_summary_from_youtube(youtube_url: str, language: str = "es") -> str
             input=transcript
         )
         logger.info(f"Summary generated for URL: {youtube_url}")
+        redis_client.setex(cache_key, 60 * 60, response.output_text)  # 1 hora
         return response.output_text
     except TranscriptException as e:
         logger.error(f"TranscriptException: {str(e)}")
