@@ -53,7 +53,7 @@ async def generate_quiz(
             f"Quiz request: URL={validated_url}, Language={validated_language}, "
             f"Questions={num_questions}"
         )
-        quiz_questions = generate_quiz_from_youtube(
+        quiz_questions = await generate_quiz_from_youtube(
             validated_url,
             validated_language,
             num_questions

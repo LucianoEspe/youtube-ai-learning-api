@@ -45,7 +45,7 @@ async def generate_summary(
         validated_url = validate_youtube_url(youtube_url)
         validated_language = validate_language(language)
         logger.info(f"Summary request: URL={validated_url}, Language={validated_language}")
-        summary = generate_summary_from_youtube(validated_url, validated_language)
+        summary = await generate_summary_from_youtube(validated_url, validated_language)
         background_tasks.add_task(
             logger.info,
             f"Summary generated successfully for URL: {validated_url}"
