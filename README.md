@@ -4,7 +4,7 @@ Una API desarrollada con FastAPI que utiliza inteligencia artificial para genera
 El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los datos de transcripción eran almacenados en el backend (Odoo Framework).
 
 ## 🚀 Demo en vivo
-[![Demo en vivo](https://img.shields.io/badge/PROBAR_DEMO-AQU%C3%8D-10b981?style=for-the-badge)](https://youtube-ai-learning-api.onrender.com/docs#/)
+<a href="https://youtube-ai-learning-api.onrender.com/docs#/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/PROBAR_DEMO-AQU%C3%8D-10b981?style=for-the-badge" alt="Demo en vivo"></a>
 
 *Nota: La demo pública utiliza mi token de OpenAI con límites de uso.*
 
@@ -20,7 +20,7 @@ El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los da
 
 - **FastAPI**: Framework web moderno y rápido para Python
 - **OpenAI API**: Modelo GPT para generación de contenido
-- **YouTube Transcript3 (RapidAPI)**: Para acceso a transcripciones de videos vía https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3
+- **YouTube Transcript3 (RapidAPI)**: Para acceso a transcripciones de videos vía <a href="https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3" target="_blank" rel="noopener noreferrer">https://rapidapi.com/solid-api-solid-api-default/api/youtube-transcript3</a>
 - **uv**: Gestor de dependencias Python ultrarrápido
 - **Pydantic**: Validación de datos y serialización
 
@@ -42,7 +42,7 @@ graph LR
 - Python 3.8+
 - Token de API de OpenAI
 - Token de API de YouTube Transcript3 (RapidAPI)
-- uv instalado ([Guía de instalación](https://docs.astral.sh/uv/getting-started/installation/))
+- uv instalado (<a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer">Guía de instalación</a>)
 
 ## 🔧 Instalación
 
@@ -72,7 +72,7 @@ graph LR
    uv run uvicorn main:app --reload
    ```
 
-La API estará disponible en http://localhost:8000
+La API estará disponible en <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a>
 
 ## 📖 Uso
 
@@ -93,4 +93,4 @@ API-Key: tu_api_key_aqui
 ```
 
 **Documentación interactiva**  
-Visita http://localhost:8000/docs para acceder a la documentación interactiva de Swagger UI.
+Visita <a href="http://localhost:8000/docs" target="_blank" rel="noopener noreferrer">http://localhost:8000/docs</a> para acceder a la documentación interactiva de Swagger UI.
