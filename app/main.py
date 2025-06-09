@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.routers.summary import router as summary_router
