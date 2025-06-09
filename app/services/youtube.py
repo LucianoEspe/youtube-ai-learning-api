@@ -4,11 +4,11 @@ import http.client
 import json
 import os
 from app.utils.exceptions import TranscriptException
+from app.services.redis_client import redis_client
 
 
 def extract_youtube_id(youtube_url: str) -> str:
     """Extract the video ID from a YouTube URL. Raises TranscriptException if invalid."""
-    logger = logging.getLogger(__name__)
     parsed = urlparse(str(youtube_url))
     if parsed.hostname in ["youtu.be"]:
         if parsed.path and len(parsed.path) > 1 and not parsed.query:
@@ -42,6 +42,13 @@ def build_transcript_endpoint(video_url: str, language: str = "en") -> str:
 def fetch_transcript_from_api(endpoint: str) -> str:
     """Fetch the transcript from the external API. Raises TranscriptException on error."""
     logger = logging.getLogger(__name__)
+    cache_key = f"transcript:{endpoint}"
+    cached = redis_client.get(cache_key)
+    if cached:
+        logger.info("Transcript fetched from Redis cache")
+        if isinstance(cached, bytes):
+            return cached.decode("utf-8")
+        return str(cached)
     conn = http.client.HTTPSConnection("youtube-transcript3.p.rapidapi.com")
     rapidapi_key = os.getenv("RAPIDAPI_KEY")
     if not rapidapi_key:
@@ -59,6 +66,7 @@ def fetch_transcript_from_api(endpoint: str) -> str:
         result = json.loads(data.decode("utf-8"))
         if 'transcript' in result:
             logger.info("Transcript fetched from API successfully")
+            redis_client.setex(cache_key, 60 * 60, result['transcript'])  # 1 hora
             return result['transcript']
         else:
             logger.error(f"Unexpected API response: {result}")
