@@ -28,15 +28,15 @@ El proyecto originalmente fue creado para trabajar con la API de Vimeo, y los da
 
 ## 🔍 Flujo de procesamiento
 ```mermaid
-  graph LR
-      A[URL YouTube] --> B(Extraer ID)
-      B --> C[Transcripción API]
-      C --> D{OpenAI API (Async)}
-      D --> E[Resumen del video]
-      D --> F[Cuestionario de autoevaluación]
-      E --> G[Formato JSON]
-      F --> G
-      G --> H[Respuesta API]
+graph LR
+    A[URL YouTube] --> B(Extraer ID)
+    B --> C[Transcripción API]
+    C --> D{OpenAI API}
+    D --> E[Resumen del video]
+    D --> F[Cuestionario de autoevaluación]
+    E --> G[Formato JSON]
+    F --> G
+    G --> H[Respuesta API]
 ```
 
 ## 📋 Requisitos previos
