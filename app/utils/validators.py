@@ -47,3 +47,12 @@ def validate_language(language: str) -> str:
         logger.warning(f"Unsupported language code: {language}, using 'en' as fallback")
         return "en"
     return language
+
+def validate_num_questions(num_questions: int) -> int:
+    """Validate the number of questions for quiz generation."""
+    if num_questions <= 0:
+        raise ValidationException("Number of questions must be greater than 0")
+    if num_questions > 20:
+        raise ValidationException("Number of questions cannot exceed 20")
+    logger.debug(f"Number of questions validated: {num_questions}")
+    return num_questions
