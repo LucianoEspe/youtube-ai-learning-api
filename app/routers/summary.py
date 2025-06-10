@@ -18,11 +18,10 @@ router = APIRouter(
     "/",
     response_model=SummaryResponse,
     summary="Generate a summary from a YouTube video transcript",
-    description="Returns a summary generated from the transcript of the provided YouTube video.",
-    responses={
+    description="Returns a summary generated from the transcript of the provided YouTube video.",    responses={
         200: {"description": "Summary generated successfully"},
-        400: {"description": "Invalid input parameters"},
-        422: {"description": "Invalid YouTube URL"},
+        400: {"description": "Invalid input parameters (invalid URL or language)"},
+        422: {"description": "Invalid YouTube URL or validation error"},
         503: {"description": "External service unavailable"},
     }
 )
